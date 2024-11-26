@@ -6,8 +6,8 @@ using namespace Automatlab;
 
 Automata::Automata(): m_Alphabet(), m_States() {}
 
-void Automata::AddState(EStateKind state) {
-    State s(m_States.size(), state);
+void Automata::AddState(EStateKind state, float x, float y) {
+    State s(m_States.size(), state, x, y);
     m_States.push_back(s);
 }
 

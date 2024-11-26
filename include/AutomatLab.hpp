@@ -6,6 +6,7 @@
 #include <qtmetamacros.h>
 #include "GraphicView.hpp"
 #include "ui/ui_AutomatLab.h"
+#include "Automata.hpp"
 
 namespace Automatlab {
 
@@ -15,6 +16,7 @@ class AutomatLab : public QMainWindow {
 private:
     Ui::AutomatLab ui;
     GraphicView gv;
+    Automata a;
 
 public:
     AutomatLab();

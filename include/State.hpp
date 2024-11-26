@@ -31,7 +31,9 @@ private:
 
 
 public:
-    State(int id, EStateKind state);
+    float x, y;
+
+    State(int id, EStateKind state, float x, float y);
     void AddTransition(State& to, const std::string& chars);
     void ToString(bool small = false);
     void UpdateState(EStateKind state);

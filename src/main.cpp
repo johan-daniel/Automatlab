@@ -25,9 +25,9 @@ int main(int argc, char* argv[]) {
 
     // a.m_States[1].RemoveTransition(1);
 
-    // //a.RemoveState(4);
+    // // a.RemoveState(4);
 
     // a.ToString();
 
-    // return 0;
+    return 0;
 }

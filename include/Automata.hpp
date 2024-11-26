@@ -22,7 +22,7 @@ public:
     Automata();
     ~Automata() {};
 
-    void AddState(EStateKind state);
+    void AddState(EStateKind state, float x, float y);
     void AddTransition(State& from, State& to, std::string chars, bool accepts_empty_word = false);
     void UpdateTransition(State& from, State& to, const std::string& new_chars, bool accepts_empty_word = false);
     void RemoveTransition(State& from, State& to);
