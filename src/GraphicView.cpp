@@ -1,13 +1,9 @@
 #include "../include/GraphicView.hpp"
 #include <iostream>
-#include <qgraphicsitem.h>
-#include <qgraphicsscene.h>
-#include <qgraphicssceneevent.h>
-#include <qnamespace.h>
 #include <QPoint>
-#include <qpen.h>
-#include <qtransform.h>
+#include <qgraphicsview.h>
 #include "../include/StateWidget.hpp"
+#include "../include/AutomatLab.hpp"
 
 
 using namespace Automatlab;
@@ -24,17 +20,15 @@ GraphicView::~GraphicView() {
     delete scene;
 }
 
-void GraphicView::Render() {
-    constexpr int const r = 50;
-    for(State s : a->m_States) {
-        scene->addEllipse(s.x-r/2., s.y-r/2., r, r, QPen(Qt::black), QBrush(Qt::white));
-    }
-}
-
 void GraphicView::mousePressEvent(QMouseEvent* event) {
-    if(itemAt(event->pos()) != nullptr) return;
-    std::cout << "GV clicked\n";
+    if(itemAt(event->pos()) != nullptr) {
+        QGraphicsView::mousePressEvent(event);
+        return;
+    }
 
+    std::cout << "APP MODE : " << AutomatLab::s_State << std::endl;
+
+    emit clicked();
     // // TODO : STATE HANDLING FOR TOOL BUTTONS
     // a->AddState(EStateKind::None, pos.x(), pos.y());
 

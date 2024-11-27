@@ -10,18 +10,30 @@
 
 namespace Automatlab {
 
+enum EClickState {
+    None = 0,
+    State,
+    Transition
+};
+
 class AutomatLab : public QMainWindow {
     Q_OBJECT
 
 private:
-    Ui::AutomatLab ui;
-    GraphicView gv;
-    Automata a;
+    Ui::AutomatLab m_UI;
+    GraphicView m_GV;
+    Automata m_Automata;
 
 public:
+    static EClickState s_State;
+
     AutomatLab();
     ~AutomatLab();
 
+protected slots:
+    void InsertStateMode(bool toggled);
+    void InsertTransitionMode(bool toggled);
+    void ButtonUsed();
 };
 
 }
