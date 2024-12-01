@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QWidget>
+#include <qpushbutton.h>
 #include <qtmetamacros.h>
 #include "GraphicView.hpp"
 #include "ui/ui_AutomatLab.h"
@@ -23,6 +24,8 @@ private:
     Ui::AutomatLab m_UI;
     GraphicView m_GV;
     Automata m_Automata;
+
+    void ToggleBtn(QPushButton* btn, bool toggled);
 
 public:
     static EClickState s_State;
