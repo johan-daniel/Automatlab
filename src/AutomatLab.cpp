@@ -1,5 +1,4 @@
 #include "../include/AutomatLab.hpp"
-#include <iostream>
 #include <qabstractbutton.h>
 #include <qpushbutton.h>
 

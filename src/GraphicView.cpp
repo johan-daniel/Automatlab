@@ -27,8 +27,17 @@ void GraphicView::mousePressEvent(QMouseEvent* event) {
     }
 
     std::cout << "APP MODE : " << AutomatLab::s_State << std::endl;
+    
+    switch(AutomatLab::s_State) {
 
-    emit clicked();
+    case None: break;
+    case State: {
+        scene->addItem(new StateWidget(mapToScene(event->pos().x(), event->pos().y())));
+    }
+    case Transition: break;
+    }
+
+    emit clicked(event->pos());
     // // TODO : STATE HANDLING FOR TOOL BUTTONS
     // a->AddState(EStateKind::None, pos.x(), pos.y());
 

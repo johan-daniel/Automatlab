@@ -7,7 +7,7 @@
 #include <qgraphicsitem.h>
 #include <QGraphicsSceneMouseEvent>
 
-constexpr int const R = 50;
+constexpr float const R = 50;
 
 class StateWidget : public QGraphicsEllipseItem {
 
@@ -16,7 +16,7 @@ class StateWidget : public QGraphicsEllipseItem {
 
         inline StateWidget(QPointF p) : StateWidget(p.x(), p.y()) {}
 
-        inline StateWidget(float x, float y, QGraphicsItem* parent = nullptr): QGraphicsEllipseItem(x,y,R,R) {
+        inline StateWidget(float x, float y, QGraphicsItem* parent = nullptr): QGraphicsEllipseItem(x-R/2,y-R/2,R,R) {
             setBrush(QBrush(Qt::white));
             setZValue(10);
         }

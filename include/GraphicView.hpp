@@ -27,7 +27,7 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;
 
 signals:
-    void clicked();
+    void clicked(QPoint pos);
 
 };
 
