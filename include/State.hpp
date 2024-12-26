@@ -24,13 +24,13 @@ class State {
 
 
 private:
-    uint16_t m_ID;
     EStateKind m_State;
     std::vector<Transition> m_Transitions;
 
 
 
 public:
+    uint16_t m_ID;
     float x, y;
 
     State(int id, EStateKind state, float x, float y);
