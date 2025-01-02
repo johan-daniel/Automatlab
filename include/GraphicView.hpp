@@ -6,6 +6,7 @@
 #include <qtmetamacros.h>
 #include <QMouseEvent>
 #include "Automata.hpp"
+#include "StateWidget.hpp"
 
 namespace Automatlab {
 
@@ -28,6 +29,7 @@ protected:
 
 signals:
     void clicked(QPoint pos);
+    void connectStateWidget(StateWidget* sw);
 
 };
 

@@ -6,7 +6,7 @@
 using namespace Automatlab;
 
 
-State::State(int id, EStateKind state, float x, float y) : m_ID(id),  m_State(state), m_Transitions(), x(x),  y(y) {}
+State::State(int id, EStateKind state, float x, float y) : m_State(state),  m_Transitions(), m_ID(id), x(x),  y(y) {}
 
 void State::AddTransition(State& to, const std::string& chars) { 
     m_Transitions.push_back({ chars, &to }); 

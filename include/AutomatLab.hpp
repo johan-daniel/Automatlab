@@ -8,12 +8,13 @@
 #include "GraphicView.hpp"
 #include "ui/ui_AutomatLab.h"
 #include "Automata.hpp"
+#include "../include/State.hpp"
 
 namespace Automatlab {
 
 enum EClickState {
     None = 0,
-    State,
+    Node,
     Transition
 };
 
@@ -33,7 +34,8 @@ public:
     AutomatLab();
     ~AutomatLab();
 
-protected slots:
+public slots:
+    void StateParams(State* s);
     void InsertStateMode(bool toggled);
     void InsertTransitionMode(bool toggled);
     void ButtonUsed();

@@ -10,9 +10,9 @@ namespace Automatlab {
 struct Transition;
 
 enum class EStateKind : uint8_t {
-    None  = 0x01,
-    First = 0x02,
-    Final = 0x04, 
+    None  = 0x00,
+    First = 0x01,
+    Final = 0x02, 
 };
 
 inline EStateKind operator|(const EStateKind& a, const EStateKind& b) {
@@ -38,6 +38,7 @@ public:
     void ToString(bool small = false);
     void UpdateState(EStateKind state);
     void RemoveTransition(const int state_ID);
+    inline EStateKind GetStateKind() const { return m_State; }
 
     bool operator==(const int rhs) { return m_ID == rhs; }
     bool operator==(const State& rhs) { return m_ID == rhs.m_ID; }

@@ -18,7 +18,7 @@ GraphicView::GraphicView(QWidget* parent): QGraphicsView(parent) {
 
 GraphicView::~GraphicView() {
     delete scene;
-    for(auto i : items) delete i;
+    for(auto& i : items) delete i;
 }
 
 void GraphicView::mousePressEvent(QMouseEvent* event) {
@@ -31,7 +31,7 @@ void GraphicView::mousePressEvent(QMouseEvent* event) {
     
     switch(AutomatLab::s_State) {
         case None: break;
-        case State: {
+        case Node: {
             a->AddState(EStateKind::None, event->pos().x(), event->pos().y()); 
             Render();   // This rerenders the entire canva on every new State :xdd:
         }
@@ -46,6 +46,7 @@ void GraphicView::Render() {
     for(auto& s : a->m_States) {
         StateWidget* sw = new StateWidget(mapToScene(s.x, s.y));
         sw->m_State = &s;
+        emit connectStateWidget(sw);
         items.push_back(sw);
         scene->addItem(sw);
     }
