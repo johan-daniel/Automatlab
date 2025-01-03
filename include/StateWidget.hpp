@@ -4,6 +4,7 @@
 #include <iostream>
 #include <qbrush.h>
 #include <qobject.h>
+#include <qpoint.h>
 #include <qtmetamacros.h>
 #include <qgraphicsitem.h>
 #include <QGraphicsSceneMouseEvent>
@@ -20,7 +21,7 @@ class StateWidget : public QObject, public QGraphicsEllipseItem {
         float x, y;
         State* m_State;
 
-        inline StateWidget(QPointF p, QGraphicsItem* parent = nullptr): QGraphicsEllipseItem(p.x()-R/2,p.y()-R/2,R,R)
+        inline StateWidget(QPointF&& p, QGraphicsItem* parent = nullptr): QGraphicsEllipseItem(p.x()-R/2,p.y()-R/2,R,R, parent)
         {
             setBrush(QBrush(Qt::white));
             QGraphicsEllipseItem::setZValue(10);

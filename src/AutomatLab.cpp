@@ -14,9 +14,8 @@ using namespace Automatlab;
 EClickState AutomatLab::s_State = EClickState::None;
 
 
-AutomatLab::AutomatLab(): m_GV(), m_Automata() { 
+AutomatLab::AutomatLab(): m_GV(&m_Automata, this), m_Automata() { 
     m_UI.setupUi(this);
-    m_GV.SetAutomata(&m_Automata);
     m_UI.GraphView->layout()->addWidget(&m_GV);
     this->show();
 
@@ -24,8 +23,9 @@ AutomatLab::AutomatLab(): m_GV(), m_Automata() {
     connect(m_UI.tb_TransitionBtn, &QAbstractButton::toggled, this, &AutomatLab::InsertTransitionMode);
     connect(&m_GV, &GraphicView::clicked, this, &AutomatLab::ButtonUsed);
 
-    connect(&m_GV, &GraphicView::connectStateWidget, this, [&] (StateWidget* sw) {
-        connect(sw, &StateWidget::clicked, this, &AutomatLab::StateParams);
+    // Forwarded signal from the StateWidgets to display their parameters on the UI
+    connect(&m_GV, &GraphicView::connectStateWidget, this, [&] (const StateWidget& sw) {
+        connect(&sw, &StateWidget::clicked, this, &AutomatLab::StateParams);
     });
 }
 
@@ -75,7 +75,7 @@ void AutomatLab::StateParams(State* s) {
     
     QGridLayout* grid_layout = static_cast<QGridLayout*>(m_UI.params->layout());
 
-    grid_layout->addWidget(new QLabel("State type"), 0, 0);
+    grid_layout->addWidget(new QLabel("State type", m_UI.params), 0, 0);
     QFrame* type_frame = new QFrame(m_UI.params);
     QVBoxLayout* vlayout = new QVBoxLayout();
     type_frame->setLayout(vlayout);

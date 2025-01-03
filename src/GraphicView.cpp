@@ -1,6 +1,8 @@
 #include "../include/GraphicView.hpp"
 #include <iostream>
 #include <QPoint>
+#include <qgraphicsitem.h>
+#include <qgraphicsscene.h>
 #include <qgraphicsview.h>
 #include "../include/StateWidget.hpp"
 #include "../include/AutomatLab.hpp"
@@ -9,16 +11,15 @@
 
 using namespace Automatlab;
 
-GraphicView::GraphicView(QWidget* parent): QGraphicsView(parent) {
-    scene = new QGraphicsScene(this);
+GraphicView::GraphicView(Automata* a, QWidget* parent): QGraphicsView(parent), a(a), scene() {
     setRenderHint(QPainter::Antialiasing);
     setSceneRect(0, 0, 1, 1);   // For some reason without this line the scene doesn't properly fill the View even though coloring it would suggest otherwise
-    setScene(scene);
+    setScene(&scene);
 }
 
 GraphicView::~GraphicView() {
-    delete scene;
-    for(auto& i : items) delete i;
+    for(auto& i : node_widgets) i->deleteLater();
+    scene.deleteLater();
 }
 
 void GraphicView::mousePressEvent(QMouseEvent* event) {
@@ -44,10 +45,10 @@ void GraphicView::mousePressEvent(QMouseEvent* event) {
 
 void GraphicView::Render() {
     for(auto& s : a->m_States) {
-        StateWidget* sw = new StateWidget(mapToScene(s.x, s.y));
+        StateWidget* sw =  new StateWidget(mapToScene(s.x, s.y));
+        node_widgets.push_back(sw);
         sw->m_State = &s;
-        emit connectStateWidget(sw);
-        items.push_back(sw);
-        scene->addItem(sw);
+        emit connectStateWidget(*sw);
+        scene.addItem(sw);
     }
 }
